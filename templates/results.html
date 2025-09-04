@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>"{{key}}"搜索结果 - 简易搜索</title>
+    <!-- 引入Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- 自定义Tailwind配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2D82B7',
+                        secondary: '#F0F4F8',
+                        accent: '#54BAB9',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .result-title:hover {
+                text-decoration: underline;
+            }
+        }
+    </style>
+</head>
+	<body class="bg-gray-50 min-h-screen">
+		<h1>"{{ key }}"的搜索结果：</h1>
+        	<ul>
+        		{% for result in results %}
+        		<li>
+            			<a href="{{ result }}">{{ result }}</a>
+        		</li>
+        		{% endfor %}
+    		</ul>
+    	</body>
+</html>

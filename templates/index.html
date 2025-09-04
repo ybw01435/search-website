@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简易搜索</title>
+    <!-- 引入Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- 自定义Tailwind配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2D82B7',
+                        secondary: '#F0F4F8',
+                        accent: '#54BAB9',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .search-shadow {
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+            .search-shadow:hover {
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+    <!-- 主要内容区 -->
+    <main class="container mx-auto px-4 pt-20 flex flex-col items-center">
+        <!-- 搜索logo -->
+        <div class="mb-8 text-center">
+            <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-bold text-primary">
+                <i class="fa fa-search mr-2"></i>简易搜索
+            </h1>
+            <p class="text-gray-500 mt-2">简单、快速的查询工具</p>
+        </div>
+
+        <!-- 搜索框 -->
+        <div class="w-full max-w-2xl mb-8">
+            <form id="searchForm" action="query" method="get" class="relative"> <!--主要修改这里-->
+                <input 
+                    type="text" 
+                    name="key" 
+                    id="searchInput" 
+                    placeholder="请输入搜索内容..." 
+                    class="w-full py-3 px-5 pr-12 rounded-full-lg border border-gray-200 search-shadow transition-all focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+                    required
+                >
+                <button type="submit" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-primary transition-colors">
+                    <i class="fa fa-search text-xl"></i>
+                </button>
+            </form>
+        </div>
+        
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="mt-auto bg-white border-t border-gray-200 py-6">
+        <div class="container mx-auto px-4 text-center text-gray-500 text-sm">
+            <p> 简易搜索工具 - 一个简单的查询工具</p>
+	    <div class="mt-2 space-x-6">
+                <!-- 也可以在底部再添加一个豆包链接 -->
+                <a href="https://www.doubao.com" target="_blank" class="hover:text-primary transition-colors">
+                    访问豆包
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 搜索框聚焦效果
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('focus', () => {
+            document.querySelector('form').classList.add('scale-[1.01]');
+        });
+        searchInput.addEventListener('blur', () => {
+            document.querySelector('form').classList.remove('scale-[1.01]');
+        });
+
+        // 支持回车键搜索
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                document.getElementById('searchForm').submit();
+            }
+        });
+    </script>
+</body>
+</html>
